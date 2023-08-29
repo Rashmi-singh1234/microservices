@@ -1,0 +1,101 @@
+version: '3'
+services:
+  dbservice:
+    image: mysql
+    container_name: database
+    environment:
+      - MYSQL_ROOT_PASSWORD=Password@123
+      - MYSQL_ROOT_USERNAME=root
+    volumes:
+      - .:/data
+    ports:
+      - 3306:3306
+    networks:
+      - ecommerce
+    
+    
+  e-server:
+    build: 
+      context: ./e_server/e_server
+      dockerfile: Dockerfile
+    image: "e-server"
+    container_name: eserverService
+    volumes:
+      - .:/data
+    ports: 
+      - 9092:8761
+
+    networks:
+      - ecommerce
+  
+  price-api:
+    build: 
+      context: ./price-service/price-service
+      dockerfile: Dockerfile
+    image: "price-service"
+    container_name: priceService
+    volumes:
+      - .:/data
+    depends_on:
+      - e-server
+    ports:
+      - 8085:8081
+      
+    networks:
+      - ecommerce
+
+  product-api:
+    build: 
+      context: ./product_service/product_service
+      dockerfile: Dockerfile
+    image: "product-service"
+    container_name: productService
+    volumes:
+      - .:/data
+    depends_on:
+      - dbservice
+      - e-server
+      - price-api
+    ports:
+      - 8083:9555
+      
+    networks:
+      - ecommerce
+  
+  apigateway:
+    build: 
+      context: ./apigateway/apigateway
+      dockerfile: Dockerfile
+    image: "apigateway"
+    container_name: apigatewayService
+    volumes:
+      - .:/data
+    depends_on:
+      - e-server
+      - price-api
+      - product-api
+    ports:
+      - 8082:8999
+      
+    networks:
+      - ecommerce
+
+  hysdashboard:
+    build: 
+      context: ./hys-dashboard/hys-dashboard
+      dockerfile: Dockerfile
+    image: "hysdashboard"
+    container_name: dashboardService
+    volumes:
+      - .:/data
+    depends_on:
+      - apigateway
+    ports:
+      - 8081:9595
+      
+    networks:
+      - ecommerce
+
+networks:
+  ecommerce:
+        

@@ -1,0 +1,5 @@
+https://hub.docker.com/r/rashmirocks/price-service.jar
+https://hub.docker.com/r/rashmirocks/apigateway.jar
+https://hub.docker.com/r/rashmirocks/product-service.jar
+https://hub.docker.com/r/rashmirocks/e-server.jar
+https://hub.docker.com/r/rashmirocks/hysdashboard.jar

@@ -1,0 +1,79 @@
+price-service port : 8081
+product-service port : 9555
+{
+    "id" : 125,
+    "name" : "Yoga for elders",
+    "category": {
+        "id" :521,
+        "name":"health",
+        "brand":"fitness foundation"
+    },
+    "discount": 5.0,
+    "discountDescription" : "Year end sale offer"
+}
+{
+        "id": 128,
+        "name": "Redmi10",
+        "category": {
+            "id": 721,
+            "name": "phone",
+            "brand": "MI"
+        },
+        "discount": 2900.0,
+        "discountDescription": "Year end sale offer"
+    }
+
+api-gateway port: 8999
+
+docker commands->
+docker pull hello-world //download image from dockerhub of helloworld on system
+docker images //all images 
+docker pull openjdk:18 //for version 18
+docker search MySql //search image
+docker run hello-world
+docker ps// to create container
+docker ps -a //all container
+docker run --name pythonContainer -d python //container created with name
+docker run --name pythonContainer1 -it -d python //container will not get closed
+docker ps
+docker exec -it pastecontainerid pastecommand //to go inside container
+docker inspect pastecontainerid
+docker images
+docker run --name javaContainer -it -d openjdk
+docker exec -it pastecontainerid pastecommand
+/exit
+//search image in dockerhub then try to run that
+docker pull mysql
+docker images
+docker run --name mysqlDb -e MYSQL_ROOT_PASSWORD=Password@123 -d mysql
+docker ps
+docker inspect mysqlDb
+cls
+docker exec -it mysqlDb bash
+ mysql -p
+docker exec -it mysqlDb commandname
+show databases
+create database mydb;
+use mydb;
+show tables
+exit;
+docker stop mysqlDb //to stop container
+docker ps -a //to check previously run containers
+docker rm 426 //to delete from previous also
+docker rmi openjdk //to delete image
+docker restart pythonContainer1
+docker login //dockerhub p push krne k liye jo b image bnaya h
+docker commit //create and save the container on a local system
+docker push //to push the image on dockerhub
+ docker start 3eff //to start the stopped container instead of creating another
+FROM ubuntu
+MAINTAINER rashmi
+RUN apt update
+CMD [ "echo","this is my first ubuntu image" ]
+
+docker build -t myubuntuimage //to build an image
+docker tag e-server.jar rashmirocks/e-server.jar
+
+
+
+
